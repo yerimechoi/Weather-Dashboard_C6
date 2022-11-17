@@ -1,5 +1,13 @@
+* {
+    box-sizing: border-box;
+}
+
 :root{
-    --btn_color: #3D4B72;
+    --btn1_color: #586895;
+    --btn1_border: #48577a;
+    --btn2_color: #c1c1c1;
+    --border: #b0b0b0;
+    --card: #2C3652;
 }
 
 #header{
@@ -14,7 +22,89 @@
     color: white;
 }
 
-#main{
-    background: white;
-    height: 500px;
+main {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.left{
+    flex: 25%;
+    text-align: left;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+input{
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+}
+
+input{
+    margin-bottom: 15px;
+    padding: 5px;
+}
+
+#searchBtn{
+    width: 100%;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 3px;
+    background-color: var(--btn1_color);
+    border: 1px solid var(--btn1_border);
+    margin-bottom: 15px;
+    padding: 5px;
+}
+
+#border{
+    border-bottom: 1px solid var(--btn2_color);
+}
+
+#btn1{
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 3px;
+    background-color: var(--btn2_color);
+    border: 1px solid var(--border);
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#btn{
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 3px;
+    background-color: var(--btn2_color);
+    border: 1px solid var(--border);
+    margin-bottom: 15px;
+}
+
+
+.right{
+    flex: 75%;
+    padding-left: 15px;
+    padding-right: 150px;
+}
+
+.today{
+    border: 1px solid var(--border);
+    padding: 5px;
+    margin-bottom: 15px;
+}
+
+.fiveDay{
+    display: flex;
+}
+
+.cards{
+    display: flex;
+}
+
+.card_1{
+    background-color: var(--card);
+    color: white;
 }
