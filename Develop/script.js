@@ -7,8 +7,11 @@
 // presented with current city name, date, icon (depending on weather coniditions), temerpature, wind & humidity 
 // presented with future city name, date, icon (depending on weather coniditions), temerpature, wind & humidity 
     // long&lat results = future
+//https://pro.openweathermap.org/data/2.5/forecast/hourly?lat=${lat}&lon=${lon}&appid={API key}
 
 var APIKey = "c9e7827720d40ceda697937555df69aa";
+var lat;
+var long;
 
 //current city
 // $(document).ready(function(){
