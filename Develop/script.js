@@ -13,10 +13,6 @@ var APIKey = "c9e7827720d40ceda697937555df69aa";
 var lat;
 var long;
 
-//current city
-// $(document).ready(function(){
-// });
-
 $(`#searchBtn`).click(function(event){
     event.preventDefault();
 
@@ -30,13 +26,15 @@ $(`#searchBtn`).click(function(event){
 function searchWeather(city){
     var searchURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`;
 
-    $.ajax({
-        url: searchURL,
-        method: `GET`,
-    }).then(function(response){
-        console.log(response)
+    fetch(searchURL).then(function(response){
+        if (response.ok){
+            response.json().then(function(data){
+                displayWeather(data.items, )
+            })
+        }
     })
 }
+
 
 
 
