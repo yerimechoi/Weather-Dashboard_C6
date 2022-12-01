@@ -9,41 +9,46 @@
     // long&lat results = future
 //https://pro.openweathermap.org/data/2.5/forecast/hourly?lat=${lat}&lon=${lon}&appid={API key}
 
-var recentSearchContainer = document.querySelector(".left");
+let recentSearchContainer = document.querySelector(".left");
 
-var APIKey = "c9e7827720d40ceda697937555df69aa";
+let APIKey = "c9e7827720d40ceda697937555df69aa";
 
-var today_cityDate = document.querySelector("#city&date");
-var today_icon = document.querySelector("#icon");
-var today_temp = document.querySelector("#todays-temp");
-var today_wind = document.querySelector ("#todays-wind");
-var today_hum = document.querySelector("#todays-hum");
+let today_cityDate = document.querySelector("#city&date");
+let today_icon = document.querySelector("#icon");
+let today_temp = document.querySelector("#todays-temp");
+let today_wind = document.querySelector ("#todays-wind");
+let today_hum = document.querySelector("#todays-hum");
 
-var day2 = document.querySelector("#d2");
-var day2_temp = document.querySelector("#2-temp");
-var day2_wind = document.querySelector("#2-wind");
-var day2_hum = document.querySelector("#2-hum");
-var day3 = document.querySelector("#d3");
-var day3_temp = document.querySelector("#3-temp");
-var day3_wind = document.querySelector("#3-wind");
-var day3_hum = document.querySelector("#3-hum");
-var day4 = document.querySelector("#d4");
-var day4_temp = document.querySelector("#4-temp");
-var day4_wind = document.querySelector("#4-wind");
-var day4_hum = document.querySelector("#4-hum");
-var day5 = document.querySelector("#d5");
-var day5_temp = document.querySelector("#5-temp");
-var day5_wind = document.querySelector("#5-wind");
-var day5_hum = document.querySelector("#5-hum");
-var day6 = document.querySelector("#d6");
-var day6_temp = document.querySelector("#6-temp");
-var day6_wind = document.querySelector("#6-wind");
-var day6_hum = document.querySelector("#6-hum");
+let day2 = document.querySelector("#d2");
+let day2_temp = document.querySelector("#2-temp");
+let day2_wind = document.querySelector("#2-wind");
+let day2_hum = document.querySelector("#2-hum");
+let day3 = document.querySelector("#d3");
+let day3_temp = document.querySelector("#3-temp");
+let day3_wind = document.querySelector("#3-wind");
+let day3_hum = document.querySelector("#3-hum");
+let day4 = document.querySelector("#d4");
+let day4_temp = document.querySelector("#4-temp");
+let day4_wind = document.querySelector("#4-wind");
+let day4_hum = document.querySelector("#4-hum");
+let day5 = document.querySelector("#d5");
+let day5_temp = document.querySelector("#5-temp");
+let day5_wind = document.querySelector("#5-wind");
+let day5_hum = document.querySelector("#5-hum");
+let day6 = document.querySelector("#d6");
+let day6_temp = document.querySelector("#6-temp");
+let day6_wind = document.querySelector("#6-wind");
+let day6_hum = document.querySelector("#6-hum");
+
+$(document).ready(function(){
+    let innit = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`;
+
+});
 
 $(`#searchBtn`).click(function(event){
     event.preventDefault();
 
-    var city = $(".userInput").val().trim();
+    let city = $(".userInput").val().trim();
     if (city === " "){
         return alert('Enter a valid City Name');
     }
@@ -51,7 +56,7 @@ $(`#searchBtn`).click(function(event){
 });
 
 function searchWeather(city){
-    var searchURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`;
+    let searchURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`;
 
     fetch(searchURL).then(function(response){
         if (response.ok){
@@ -62,10 +67,4 @@ function searchWeather(city){
     })
 }
 
-
-
-
-// var longLatURL = `https://pro.openweathermap.org/data/2.5/forecast/hourly?lat=${lat}&lon=${lon}&appid={API key}`;
-// var lat;
-// var lon;
-// var limit;
+let longLatURL = `https://pro.openweathermap.org/data/2.5/forecast/hourly?lat=${lat}&lon=${lon}&appid=${APIKey}&units=imperial`;
