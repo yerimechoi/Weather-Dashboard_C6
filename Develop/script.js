@@ -1,70 +1,91 @@
-// TO DO
-// .ready() current location
-// search btn event listener
-// search city
-// save location & data to search history
-// add btn to the search history
-// presented with current city name, date, icon (depending on weather coniditions), temerpature, wind & humidity 
-// presented with future city name, date, icon (depending on weather coniditions), temerpature, wind & humidity 
-    // long&lat results = future
-//https://pro.openweathermap.org/data/2.5/forecast/hourly?lat=${lat}&lon=${lon}&appid={API key}
-
-let recentSearchContainer = document.querySelector(".left");
-
 let APIKey = "c9e7827720d40ceda697937555df69aa";
+let searchedCity = JSON.parse(localStorage.getItem("cities"));
+let userInput = "";
 
-let today_cityDate = document.querySelector("#city&date");
-let today_icon = document.querySelector("#icon");
-let today_temp = document.querySelector("#todays-temp");
-let today_wind = document.querySelector ("#todays-wind");
-let today_hum = document.querySelector("#todays-hum");
+//initial weather
+function init(){
+    localStorage.removeItem("cities");
 
-let day2 = document.querySelector("#d2");
-let day2_temp = document.querySelector("#2-temp");
-let day2_wind = document.querySelector("#2-wind");
-let day2_hum = document.querySelector("#2-hum");
-let day3 = document.querySelector("#d3");
-let day3_temp = document.querySelector("#3-temp");
-let day3_wind = document.querySelector("#3-wind");
-let day3_hum = document.querySelector("#3-hum");
-let day4 = document.querySelector("#d4");
-let day4_temp = document.querySelector("#4-temp");
-let day4_wind = document.querySelector("#4-wind");
-let day4_hum = document.querySelector("#4-hum");
-let day5 = document.querySelector("#d5");
-let day5_temp = document.querySelector("#5-temp");
-let day5_wind = document.querySelector("#5-wind");
-let day5_hum = document.querySelector("#5-hum");
-let day6 = document.querySelector("#d6");
-let day6_temp = document.querySelector("#6-temp");
-let day6_wind = document.querySelector("#6-wind");
-let day6_hum = document.querySelector("#6-hum");
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=toronto&units=imperial&appid=${APIKey}`)
+        .then(function(data){
+            return data.json();
+        }).then(function(data){
+            let tCity = $("<h4>").attr('id', 'cityDay').text(data.name);
+            let today = dayjs().format(" (MM/DD/YYYY)")
+            var tDate = tCity.append(today);
+            let tIcon = $("<i>").attr('id', 'icon').text(data.weather.icon);
+            let tTemp = $("<p>").attr('id', 'todays-temp').text("Temperature: " + data.main.temp + "˚F");
+            let tWind = $("<p>").attr('id', 'todays-wind').text("Wind: " + data.wind.speed + "MPH");
+            let tHum = $("<p>").attr('id', 'todays-hum').text("Humidity: " + data.main.humidity + "%");
+            $(".today").append(tCity, tDate, tIcon, tTemp, tWind, tHum);
+        });
 
-$(document).ready(function(){
-    let innit = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`;
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=Toronto&units=imperial&appid=${APIKey}`)
+        .then(function(data) {
+            return data.json();
+        }).then(function(data){
+            for(let i=0; i < 5; i++){
+                let div = $("<div>").addClass("cardS");
+            //dates
+                //let date = dayjs().format("MM/DD/YYYY");
+                //$("<h6>").text(date[i]);
+            //icon
+                //let icon = $("<i>").attr('id', 'icon').text(data.weather[i].icon)
+            //temp
+                // let temp = $("<p>").attr('id', 'todays-temp').text("Temperature: " + data.main[i].temp + " ˚F");
+            //wind
+                //let wind = $("<p>").attr('id', 'todays-wind').text("Wind: " + data.wind[i].speed + " MPH");
+            //hum
+                //let hum = $("<p>").attr('id', 'todays-hum').text("Humidity: " + main[i].humidity + " %");
+            //append
+                //$(".cardS").append(date, icon, temp, wind, hum);
+        }})
+    
+    let Torontobutton = $("<button>").attr('id', 'btn').text("Toronto");
+    $(".history").append(Torontobutton);
+};
 
-});
-
+//search button event listener
 $(`#searchBtn`).click(function(event){
     event.preventDefault();
 
     let city = $(".userInput").val().trim();
-    if (city === " "){
-        return alert('Enter a valid City Name');
-    }
-    searchWeather(city);
+
+    if (storage.includes(city)){
+        (storage).remove(city);
+    } else {
+        (storage).push(city);
+    };
+
+    searchWeather();
+
+    localStorage.setItem("cities", JSON.stringify(searchedCity));
+    let button = $("<button>").attr('id', 'btn').text(city)
+    $(".history").append(button);
 });
 
-function searchWeather(city){
-    let searchURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`;
+//seach city function
+function searchWeather(){
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${userInput}&units=imperial&appid=${APIKey}`)
+        .then(function(data){
+            return data.json();
+        }).then(function(data){
+            let date = dayjs().format(" (MM/DD/YYYY)")
+            let icon = $("<i>").attr('id', 'icon').text(data.weather.icon);
+            let temp = $("<p>").attr('id', 'todays-temp').text("Temperature: " + data.main.temp + "˚F");
+            let wind = $("<p>").attr('id', 'todays-wind').text("Wind: " + data.wind.speed + "MPH");
+            let hum = $("<p>").attr('id', 'todays-hum').text("Humidity: " + data.main.humidity + "%");
+            $(".today").append(date, icon, temp, wind, hum);
+        });
 
-    fetch(searchURL).then(function(response){
-        if (response.ok){
-            response.json().then(function(data){
-                displayWeather(data.items, )
-            })
-        }
-    })
-}
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${userInput}&units=imperial&appid=${APIKey}`)
+        .then(function(data) {
+            return data.json();
+        }).then(function(data){
+            for(let i=0; i < 5; i++){
+                let div = $("<div>").addClass("cardS");
+                //WHATEVER IS CORRECT IN THE INIT FUNCTION
+        }})
+};
 
-let longLatURL = `https://pro.openweathermap.org/data/2.5/forecast/hourly?lat=${lat}&lon=${lon}&appid=${APIKey}&units=imperial`;
+init();
