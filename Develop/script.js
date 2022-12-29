@@ -26,19 +26,19 @@ function init(){
         }).then(function(data){
             for(let i=0; i < 5; i++){
                 let div = $("<div>").addClass("cardS");
-            //dates
-                //let date = dayjs().format("MM/DD/YYYY");
-                //$("<h6>").text(date[i]);
-            //icon
-                //let icon = $("<i>").attr('id', 'icon').text(data.weather[i].icon)
-            //temp
-                // let temp = $("<p>").attr('id', 'todays-temp').text("Temperature: " + data.main[i].temp + " ˚F");
-            //wind
-                //let wind = $("<p>").attr('id', 'todays-wind').text("Wind: " + data.wind[i].speed + " MPH");
-            //hum
-                //let hum = $("<p>").attr('id', 'todays-hum').text("Humidity: " + main[i].humidity + " %");
-            //append
-                //$(".cardS").append(date, icon, temp, wind, hum);
+            // //dates
+            //     let date = dayjs().format("MM/DD/YYYY");
+            //     $("<h6>").text(date[i]);
+            // //icon
+            //     let icon = $("<i>").attr('id', 'icon').text(data.weather[i].icon)
+            // //temp
+            //     let temp = $("<p>").attr('id', 'todays-temp').text("Temperature: " + data.main[i].temp + " ˚F");
+            // //wind
+            //     let wind = $("<p>").attr('id', 'todays-wind').text("Wind: " + data.wind[i].speed + " MPH");
+            // //hum
+            //     let hum = $("<p>").attr('id', 'todays-hum').text("Humidity: " + main[i].humidity + " %");
+            // //append
+            //     $(".cardS").append(date, icon, temp, wind, hum);
         }})
     
     let Torontobutton = $("<button>").attr('id', 'btn').text("Toronto");
