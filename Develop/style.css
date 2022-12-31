@@ -112,4 +112,5 @@ input {
     background-color: var(--search_color);
     border-radius: 3px;
     color: white;
+    display: flex;
 }
