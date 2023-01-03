@@ -10,7 +10,7 @@ function init(cityName){
         .then(function(data){
             return data.json();
         }).then(function(data){
-            let tCity = $("<h4>").attr('id', 'cityDay').text(data.name);
+            let tCity = $("<h3>").attr('id', 'cityDay').text(data.name);
             let today = dayjs().format(" (MM/DD/YYYY)")
             var tDate = tCity.append(today);
             let tIcon = $("<i>").attr('id', 'icon').text(data.weather.icon);
