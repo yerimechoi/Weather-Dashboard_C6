@@ -4,7 +4,7 @@ let userInput = "";
 
 function init(cityName){
     $(".today").html("");
-    $(".card_1").html("");
+    $(".cards").html("");
 
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${APIKey}`)
         .then(function(data){
@@ -28,15 +28,13 @@ function init(cityName){
             let dataList = data.list;
             for(let i=0; i < dataList.length; i=i+8){
                 let div = $("<div>").addClass("forecastDiv");
-                div.attr("style", "margin-left: 10px;");
-                let date = dataList[i].dt_txt.split(" ")[0];
-                $("<h6>").text(date);
-                let icon = $("<i>").attr('id', 'icon').text(dataList[i].weather.icon)
+                const date = $("<h5>").text(dataList[i].dt_txt.split(" ")[0]);
+                let icon = $("<i>").attr('id', 'icon').text(dataList[i].weather.icon);
                 let temp = $("<p>").attr('id', 'todays-temp').text("Temperature: " + dataList[i].main.temp + " ˚F");
                 let wind = $("<p>").attr('id', 'todays-wind').text("Wind: " + dataList[i].wind.speed + " MPH");
                 let hum = $("<p>").attr('id', 'todays-hum').text("Humidity: " + dataList[i].main.humidity + " %");
                 div.append(date, icon, temp, wind, hum)
-                $(".card_1").append(div);
+                $(".cards").append(div);
         }}) 
 };
 
@@ -61,14 +59,14 @@ $(`#searchBtn`).click(function(event){
     localStorage.setItem("cities", JSON.stringify(searchedCity));
     console.log(searchedCity);
     let button = $("<button>").attr('id', 'btn').text(city)
+    console.log(button);
+    button.click(function(event){
+        event.preventDefault();
+        console.log(event.target.innerHTML);
+        init(event.target.innerHTML);
+    })
+ 
     $(".history").append(button);
-});
-
-$(`#btn`).click(function(){
-
-    let reinsertCity = $(this).value;
-
-    init(reinsertCity);
 });
 
 function getFromLocalStorage(){
